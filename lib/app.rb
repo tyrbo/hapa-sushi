@@ -3,12 +3,9 @@ require 'sequel'
 DB = Sequel.sqlite
 
 class HapaSushiApp < Sinatra::Base
-  def initialize
-    super
-  end
+  set :root, 'lib/app'
 
-  get '*' do
-    puts DB
-    page = request.path_info
+  get '/' do
+    erb :index
   end
 end
