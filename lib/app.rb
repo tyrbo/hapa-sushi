@@ -11,7 +11,6 @@ class HapaSushiApp < Sinatra::Base
 
   get '/happy' do
     erb :happy
-    'happy hour menu'
   end
 
   get '/lunch' do
@@ -41,7 +40,7 @@ class HapaSushiApp < Sinatra::Base
 
   get '/platters' do
     erb :platters
-    'our platters'
+    'our platters '
   end
 
   get '/to-go' do
