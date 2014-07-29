@@ -8,4 +8,8 @@ class HapaSushiApp < Sinatra::Base
   get '/' do
     erb :index
   end
+
+  get '/about-hapa' do
+    erb :about
+  end
 end
