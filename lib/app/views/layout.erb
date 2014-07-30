@@ -69,27 +69,22 @@
       </div><!-- /#header -->
       <div id="navigation" class="col-full">
         <ul id="main-nav" class="nav fl">
-          <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home"><a href="/">Home</a></li>
-          <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="#">Menus</a>
+          <li class="<%= classes_for(path: '/') %>">
+            <a href="/">Home</a>
+          </li>
+          <li class="<%= classes_for(path: '#', matcher: '/menu', children: true) %>"><a href="#">Menus</a>
             <ul class="sub-menu">
               <% menus.each do |menu| %>
-                <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="menu/<%= menu.path %>"><%= menu.title %></a></li>
+                <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/menu/<%= menu.path %>"><%= menu.title %></a></li>
               <% end %>
             </ul>
           </li>
-          <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="/location">Locations</a>
-            <ul class="sub-menu">
-              <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/location/boulder-pearl-street">Boulder &#8211; Pearl St</a></li>
-              <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/location/cherry-creek">Cherry Creek</a></li>
-              <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/location/landmark-at-greenwood-village">Landmark</a></li>
-              <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/location/lodo/">LoDo</a></li>
-            </ul>
-          </li>
-          <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/shop">Shop</a></li>
-          <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/make-a-reservation">Reservations</a></li>
-          <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/about-hapa">About Hapa</a></li>
-          <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/catering">Catering</a></li>
-          <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/contact">Contact</a></li>
+          <li class="<%= classes_for(path: '/location') %>"><a href="/location">Locations</a></li>
+          <li class="<%= classes_for(path: '/shop') %>"><a href="/shop">Shop</a></li>
+          <li class="<%= classes_for(path: '/make-a-reservation') %>"><a href="/make-a-reservation">Reservations</a></li>
+          <li class="<%= classes_for(path: '/about-hapa') %>"><a href="/about-hapa">About Hapa</a></li>
+          <li class="<%= classes_for(path: '/catering') %>"><a href="/catering">Catering</a></li>
+          <li class="<%= classes_for(path: '/contact') %>"><a href="/contact">Contact</a></li>
         </ul>        
       </div><!-- /#navigation -->
       <div id="content" class="col-full">
