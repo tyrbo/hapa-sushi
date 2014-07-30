@@ -34,13 +34,13 @@ end
 DB.drop_table(:locations) if DB.table_exists?(:locations)
 DB.create_table(:locations) do
   primary_key :id
-  String :path
-  String :title
-  String :address
-  String :hours
-  String :phone_fax
-  String :delivery
-  String :reservations
+  String      :path
+  String      :title
+  String      :address
+  String      :hours
+  String      :phone_fax
+  String      :delivery
+  String      :reservations
 end
 
 DB.drop_table(:photos) if DB.table_exists?(:photos)

@@ -8,4 +8,5 @@ gem 'sqlite3'
 group :test do
   gem 'capybara'
   gem 'capybara_minitest_spec'
+  gem 'launchy'
 end

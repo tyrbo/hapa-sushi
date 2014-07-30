@@ -9,7 +9,6 @@ require 'app/models/item'
 require 'app/helpers/menu_helper'
 require 'app/helpers/link_helper'
 require 'app/models/location'
-require 'app/models/location'
 require 'app/models/photo'
 require 'app/models/happy_hour'
 
@@ -30,6 +29,19 @@ class HapaSushiApp < Sinatra::Base
     menu = Menu.find(path: path)
     if menu
       erb :menu, locals: { menu: menu }
+    else
+      raise Sinatra::NotFound
+    end
+  end
+
+  get '/location' do
+    erb :locations, locals: { locations: Location.all }
+  end
+
+  get '/location/:path' do |path|
+    location = Location.find(path: path)
+    if location
+      erb :location, locals: { location: location }
     else
       raise Sinatra::NotFound
     end

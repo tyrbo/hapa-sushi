@@ -5,5 +5,6 @@ module DatabaseHelpers
     Item.dataset.delete
     Location.dataset.delete
     Photo.dataset.delete
+    HappyHour.dataset.delete
   end
 end
