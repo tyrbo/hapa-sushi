@@ -8,6 +8,10 @@ require 'app/models/section'
 require 'app/models/item'
 require 'app/helpers/menu_helper'
 require 'app/helpers/link_helper'
+require 'app/models/location'
+require 'app/models/location'
+require 'app/models/photo'
+require 'app/models/happy_hour'
 
 class HapaSushiApp < Sinatra::Base
   set :root, 'lib/app'

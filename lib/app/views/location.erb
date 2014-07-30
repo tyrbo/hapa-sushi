@@ -1,0 +1,8 @@
+<%= location.title %>
+<% location.photos.each do |photo| %>
+  <img src="images/uploads/<%= photo.path %>" alt="<%= photo.alt %>">
+<% end %>
+<% location.happy_hours.each do |menu| %>
+  <%= menu.title %>
+  <%= menu.description %>
+<% end %>
