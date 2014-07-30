@@ -1,3 +1,4 @@
 <% locations.each do |location| %>
   <%= location.path %>
+  <img src="<%= location.primary_image.path %>" alt="<%= location.primary_image.alt %>">
 <% end %>
