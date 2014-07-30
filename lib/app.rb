@@ -6,6 +6,7 @@ DB = Sequel.sqlite("db/hapa_#{environment}")
 require 'app/models/menu'
 require 'app/models/section'
 require 'app/models/item'
+require 'app/models/location'
 
 class HapaSushiApp < Sinatra::Base
   set :root, 'lib/app'
@@ -22,6 +23,19 @@ class HapaSushiApp < Sinatra::Base
     menu = Menu.find(path: path)
     if menu
       erb :menu, locals: { menu: menu }
+    else
+      raise Sinatra::NotFound
+    end
+  end
+
+  get '/location' do
+    erb :locations, locals: { locations: Location.all }
+  end
+
+  get '/location/:path' do |path|
+    location = Location.find(path: path)
+    if location
+      erb :location, locals: { location: location }
     else
       raise Sinatra::NotFound
     end

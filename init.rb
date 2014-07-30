@@ -30,3 +30,15 @@ DB.create_table(:items) do
   String :price
   Integer :section_id
 end
+
+DB.drop_table(:locations) if DB.table_exists?(:locations)
+DB.create_table(:locations) do
+  primary_key :id
+  String :path
+  String :title
+  String :address
+  String :hours
+  String :phone_fax
+  String :delivery
+  String :reservations
+end
