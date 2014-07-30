@@ -1,0 +1,26 @@
+<div id="main" class="col-left">
+  <div class="post">
+    <h1 class="title">Catering</h1>
+    <div class="entry">
+      <h3>The Perfect Blend of East-Meets-West to Complement Your Next Party</h3>
+      <p>An exotic menu. Hapa not only offers the finest sushi available for your party, but we also have a wide variety of appetizers and entrees to please your palate. Pick and choose from a variety of sushi rolls or entrees from our diverse menu to entice your guests, whether they are sushi newbies or connoisseurs. No matter what your event, occasion or budget, our professional catering staff will be able to help create a memorable event.</p>
+      <p>
+        <img class="alignnone size-full" title="food 16" alt="" src="/images/food-16-e1302216718242.gif" width="610" height="276">
+      </p>
+      <h3>Your Next Event</h3>
+      <p>Please call you nearest location to order large sushi platters or to-go orders for your event.  Or, if you want our chefs to come entertain and create a sushi spectacle at your event, please send us an email to info@hapasushi.com with details of your event including your budget, number of people who will be in attendance, date, time, and location.</p>
+    </div>
+  </div>
+</div>
+<div id="sidebar" class="col-right">
+  <div class="product-info-right">
+    <h2 class="title">Our Menus</h2>
+    <% menus.each do |menu| %>
+      <div class="side-menu">
+        <h3><a href="/menu/<%= menu.path %>"><%= menu.title %> Menu</a></h3>
+        <a href="/menu/<%= menu.path %>">See &raquo;</a>
+        <a href="#" target="_blank">Download &raquo;</a>
+      </div>
+    <% end %>
+  </div>
+</div>
