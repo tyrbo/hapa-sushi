@@ -6,9 +6,12 @@ DB = Sequel.sqlite("db/hapa_#{environment}")
 require 'app/models/menu'
 require 'app/models/section'
 require 'app/models/item'
+require 'app/helpers/menu_helper'
 
 class HapaSushiApp < Sinatra::Base
   set :root, 'lib/app'
+
+  helpers MenuHelper
 
   not_found do
     erb :not_found

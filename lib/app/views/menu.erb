@@ -1,9 +1,31 @@
-<%= menu.title %>
-<% menu.sections.each do |section| %>
-  <%= section.title %>
-  <% section.items.each do |item| %>
-    <%= item.title %>
-    <%= item.description %>
-    <%= item.price %>
+<h1 class="menu-title">
+  <%= menu.title %> Menu
+</h1>
+<div id="main" class="col-left">
+  <% menu.sections.select(&:left?).each do |section| %>
+    <h2 class="menu-anchor">
+      <a href="javascript:animatedcollapse.toggle('menu-<%= section.id %>')">
+        <%= section.title %>
+      </a>
+    </h2>
+    <div id="menu-<%= section.id %>" class="hide">
+      <% section.items.each do |item| %>
+        <div class="menu-food fl">
+          <h2><%= item.title %></h2>
+          <div class="fix"></div>
+          <div class="info">
+            <p><%= item.description %></p>
+          </div>
+          <div class="price-left"><%= item.price %></div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+<div id="sidebar" class="col-right">
+</div>
+<script type="text/javascript">
+  <% menu.sections.each do |section| %>
+ animatedcollapse.addDiv('menu-<%= section.id %>', 'fade=1,height=auto')
   <% end %>
-<% end %>
+</script>

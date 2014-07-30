@@ -72,14 +72,9 @@
           <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home"><a href="/">Home</a></li>
           <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="#">Menus</a>
             <ul class="sub-menu">
-              <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/happy">Happy Hour</a></li>
-              <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/lunch">Lunch</a></li>
-              <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/dinner">Dinner</a></li>
-              <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/gluten">Gluten Free</a></li>
-              <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/kids">Kids</a></li>
-              <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/drinks">Drinks</a></li>
-              <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/platters">Platters</a></li>
-              <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/to-go">To Go</a></li>
+              <% menus.each do |menu| %>
+                <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="menu/<%= menu.path %>"><%= menu.title %></a></li>
+              <% end %>
             </ul>
           </li>
           <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children"><a href="/location">Locations</a>
