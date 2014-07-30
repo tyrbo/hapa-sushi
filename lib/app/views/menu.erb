@@ -1,0 +1,9 @@
+<%= menu.title %>
+<% menu.sections.each do |section| %>
+  <%= section.title %>
+  <% section.items.each do |item| %>
+    <%= item.title %>
+    <%= item.description %>
+    <%= item.price %>
+  <% end %>
+<% end %>
