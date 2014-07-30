@@ -9,8 +9,8 @@
       </a>
     </h2>
     <div id="menu-<%= section.id %>" class="hide">
-      <% section.items.each do |item| %>
-        <div class="menu-food fl">
+      <% section.items.each_with_index do |item, index| %>
+        <div class="menu-food <%= index.even? ? 'fl' : 'fr' %>">
           <h2><%= item.title %></h2>
           <div class="fix"></div>
           <div class="info">
@@ -23,9 +23,29 @@
   </div>
 </div>
 <div id="sidebar" class="col-right">
+  <% menu.sections.select(&:right?).each do |section| %>
+    <div class="menu-title">
+      <h2><%= section.title %></h2>
+      <div class="fix"></div>
+    </div>
+    <% section.items.each do |item| %>
+      <div class="drinks">
+        <h2><%= item.title %></h2>
+        <div class="price">
+          <%= item.price %>
+        </div>
+        <div class="fix"></div>
+        <div class="info">
+          <p><%= item.description %></p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
 </div>
+<script type="text/javascript" src="/js/animatedcollapse.js"> </script>
 <script type="text/javascript">
+  animatedcollapse.init();
   <% menu.sections.each do |section| %>
- animatedcollapse.addDiv('menu-<%= section.id %>', 'fade=1,height=auto')
+    animatedcollapse.addDiv('menu-<%= section.id %>', 'fade=1,height=auto')
   <% end %>
 </script>
