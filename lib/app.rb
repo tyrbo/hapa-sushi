@@ -11,7 +11,7 @@ class HapaSushiApp < Sinatra::Base
   set :root, 'lib/app'
 
   not_found do
-    erb '404'
+    erb :not_found
   end
 
   get '/' do
