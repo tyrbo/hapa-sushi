@@ -9,7 +9,19 @@ describe Section do
 
     it 'returns false when the alignment is right' do
       section = Section.new(alignment: 'right')
-      assert section.left?
+      refute section.left?
+    end
+  end
+
+  describe '#right?' do
+    it 'returns true when the alignment is right' do
+      section = Section.new(alignment: 'right')
+      assert section.right?
+    end
+
+    it 'returns false when the alignment is left' do
+      section = Section.new(alignment: 'left')
+      refute section.right?
     end
   end
 end

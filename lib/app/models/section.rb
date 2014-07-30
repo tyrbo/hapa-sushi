@@ -4,4 +4,8 @@ class Section < Sequel::Model
   def left?
     alignment == 'left'
   end
+
+  def right?
+    !left?
+  end
 end
