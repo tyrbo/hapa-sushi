@@ -25,16 +25,13 @@ class HapaSushiApp < Sinatra::Base
   helpers MenuHelper, LinkHelper, HTMLHelper
 
   enable :sessions
-<<<<<<< HEAD
   use Rack::Flash
-=======
 
   def protected!
     unless session[:admin]
       redirect '/admin/login'
     end
   end
->>>>>>> Finishes CMS
 
   not_found do
     erb :not_found
