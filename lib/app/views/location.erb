@@ -21,7 +21,7 @@
 <div id="sidebar" class="col-right location-side">
   <h2 class="title">Address</h2>
   <p>
-    <%= location.title %>
+    <%= location.address %>
   </p>
   <h2 class="title">Hours</h2>
   <p>
@@ -32,9 +32,13 @@
     <%= location.phone_fax %>
   </p>
 
-  <h2 class="title">Delivery</h1>
-  <p><a href="<%= location.delivery %>">Order Delivery</a></p>
+  <% if !location.delivery.empty? %>
+    <h2 class="title">Delivery</h1>
+    <p><a href="<%= location.delivery %>">Order Delivery</a></p>
+  <% end %>
 
-  <h2 class="title">Reservations</h1>
-  <p><a href="<%= location.reservations %>">Make a Reservation</a></p>
+  <% if !location.reservations.empty? %>
+    <h2 class="title">Reservations</h1>
+    <p><a href="<%= location.reservations %>">Make a Reservation</a></p>
+  <% end %>
 </div>
