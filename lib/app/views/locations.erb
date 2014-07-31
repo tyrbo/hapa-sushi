@@ -1,4 +1,16 @@
-<% locations.each do |location| %>
-  <%= location.title %>
-  <img src="<%= location.primary_image.path %>" alt="<%= location.primary_image.alt %>">
-<% end %>
+<div id="main" class="fullwidth">
+  <% locations.each do |location| %>
+    <div class="location-list">
+      <a href="/location/<%= location.path %>">
+        <% if location.primary_image %>
+          <img src="/images/uploads/<%= location.primary_image.image.location_index.file.filename %>" width='440' height='400'>
+        <% else %>
+          <img src="" width='440' height='400'>
+        <% end %>
+      </a>
+      <h2><a href="/location/<%= location.path %>"><%= location.title %></a></h2>
+      <span class="fancy-link"><a href="/location/<%= location.path %>">See Details</a></span>
+      <div class="fix"></div>
+    </div>
+  <% end %>
+</div>

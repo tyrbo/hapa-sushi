@@ -1,0 +1,48 @@
+<%= erb :navbar %>
+<div class="container">
+  <div class="col-lg-5 col-lg-offset-3">
+    <h1>Editing: <%= @location.title %></h1>
+    <form action='/admin/locations/<%= @location.id %>' method='POST' class='form-signin'>
+      <input type="hidden" name="_method" value="PUT">
+      <div class="input-group">
+        <input type='text' class='form-control' name='location[title]' placeholder='title' value='<%= html_safe @location.title %>'>
+        <input type='text' class='form-control' name='location[address]' placeholder='address' value='<%= html_safe @location.address %>'>
+        <input type='text' class='form-control' name='location[hours]' placeholder='hours' value='<%= html_safe @location.hours %>'>
+        <input type='text' class='form-control' name='location[phone_fax]' placeholder='phone / fax' value='<%= html_safe @location.phone_fax %>'>
+        <input type='text' class='form-control' name='location[delivery]' placeholder='delivery' value='<%= html_safe @location.delivery %>'>
+        <input type='text' class='form-control' name='location[reservations]' placeholder='reservations' value='<%= html_safe @location.reservations %>'>
+        <span class="input-group-btn">
+          <button class="btn btn-primary" type="submit">Submit</button>
+        </span>
+      </form>
+    </div>
+  </div>
+  <div class='row col-lg-3 col-lg-offset-1'>
+    <a href="#" class="list-group-item active">Edit Photos</a>
+    <div class="list-group">
+      <% @location.photos.each do |photo| %>
+        <a href="/admin/menus/<%= @location.id %>/photos/<%= photo.id %>" class="list-group-item"><%= photo.image.file.filename %></a>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-lg-5 col-lg-offset-3">
+    <h3>Upload a new photo:</h3>
+    <form action='/admin/locations/<%= @location.id %>/photos' enctype='multipart/form-data' method='POST'>
+      <label for='primary'>Primary?</label>
+      <input type='checkbox' id='primary' name='photo[primary]' value='true'>
+      <div class="input-group">
+        <input type='file' name='photo[image]' accept='image/*'>
+        <span class="input-group-btn">
+          <button class="btn btn-primary" type="submit">Submit</button>
+        </span>
+      </form>
+    </div>
+  </div>
+  <div class="hero-unit col-lg-9">
+    <h2>Existing Photos in: <%= @location.title %></h2>
+    <% @location.photos.each do |photo| %>
+      <%= erb :photo_tab, locals: { photo: photo} %>
+    <% end %>
+  </div>
+</div>
+<a href="/admin/locations">Back</a>

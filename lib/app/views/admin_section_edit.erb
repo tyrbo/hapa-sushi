@@ -1,44 +1,44 @@
 <%= erb :navbar %>
-  <div class="container">
-    <div class="col-lg-5 col-lg-offset-3">
-      <h1>Editing: <%= @section.title %></h1>
-      <h5>and choose an alignment:</h5>
-        <form action='/admin/menus/<%= @menu_id %>/sections/<%= @section.id %>' method='POST' class='form-signin'>
-          <label for='left'>Main</label>
-          <input type='radio' id='left' name='section[alignment]' value='left'<%= ' checked' if @section.left? %>>
-          <label for='right'>Sidebar</label>
-          <input type='radio' id='right' name='section[alignment]' value='right'<%= ' checked' if @section.right? %>>
-          <input type="hidden" name="_method" value="PUT">
-          <div class="input-group">
-          <input type='text' name='section[title]' class='form-control' placeholder='new section name' value='<%= html_safe @section.title %>'>
-          <span class="input-group-btn">
-            <button class="btn btn-primary" type="button">Submit</button>
-          </span>
-        </form>
-      </div>
-    </div>
-    <div class='row col-lg-3 col-lg-offset-1'>
-      <a href="#" class="list-group-item active">Edit Items</a>
-      <div class="list-group">
-        <% @section.items.each do |item| %>
-          <a href="/admin/menus/<%= @menu_id %>/sections/<%= @section.id %>/items/<%= item.id %>" class="list-group-item"><%= item.title %></a>
-        <% end %>
-      </div>
-    </div>
-    <div class="col-lg-5 col-lg-offset-3">
-      <h3>Create a new item:</h3>
-      <form action='/admin/menus/<%= @menu_id %>/sections/<%= @section.id %>/items' method='POST'>
-        <input type='text' name='item[title]' placeholder='new item name' class='form-control'>
-        <input type='text' name='item[description]' placeholder='new item description' class='form-control'>
-        <input type='text' name='item[price]' placeholder='new item price' class='form-control'>
-        <input type='submit'class='btn btn-primary btn-block'>
+<div class="container">
+  <div class="col-lg-5 col-lg-offset-3">
+    <h1>Editing: <%= @section.title %></h1>
+    <h5>and choose an alignment:</h5>
+    <form action='/admin/menus/<%= @menu_id %>/sections/<%= @section.id %>' method='POST' class='form-signin'>
+      <label for='left'>Main</label>
+      <input type='radio' id='left' name='section[alignment]' value='left'<%= ' checked' if @section.left? %>>
+      <label for='right'>Sidebar</label>
+      <input type='radio' id='right' name='section[alignment]' value='right'<%= ' checked' if @section.right? %>>
+      <input type="hidden" name="_method" value="PUT">
+      <div class="input-group">
+        <input type='text' name='section[title]' class='form-control' placeholder='new section name' value='<%= html_safe @section.title %>'>
+        <span class="input-group-btn">
+          <button class="btn btn-primary" type="submit">Submit</button>
+        </span>
       </form>
     </div>
-    <div class="hero-unit col-lg-9">
-      <h3>Existing Items</h3>
+  </div>
+  <div class='row col-lg-3 col-lg-offset-1'>
+    <a href="#" class="list-group-item active">Edit Items</a>
+    <div class="list-group">
       <% @section.items.each do |item| %>
-        <%= erb :item_tab, locals: { item: item} %>
+        <a href="/admin/menus/<%= @menu_id %>/sections/<%= @section.id %>/items/<%= item.id %>" class="list-group-item"><%= item.title %></a>
       <% end %>
     </div>
   </div>
+  <div class="col-lg-5 col-lg-offset-3">
+    <h3>Create a new item:</h3>
+    <form action='/admin/menus/<%= @menu_id %>/sections/<%= @section.id %>/items' method='POST'>
+      <input type='text' name='item[title]' placeholder='new item name' class='form-control'>
+      <input type='text' name='item[description]' placeholder='new item description' class='form-control'>
+      <input type='text' name='item[price]' placeholder='new item price' class='form-control'>
+      <input type='submit' class='btn btn-primary btn-block'>
+    </form>
+  </div>
+  <div class="hero-unit col-lg-9">
+    <h3>Existing Items</h3>
+    <% @section.items.each do |item| %>
+      <%= erb :item_tab, locals: { item: item} %>
+    <% end %>
+  </div>
+</div>
 <a href="/admin/menus/<%= @menu_id %>">Back</a>

@@ -46,7 +46,7 @@ end
 DB.drop_table(:photos) if DB.table_exists?(:photos)
 DB.create_table(:photos) do
   primary_key :id
-  String      :path
+  String      :image
   String      :alt
   Boolean     :primary
   String      :location_id

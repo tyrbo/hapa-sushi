@@ -1,11 +1,11 @@
 <%= erb :navbar %>
-  <div class="container">
-    <div class="col-lg-5 col-lg-offset-3">
-      <div class="form-group">
-        <form action='/admin/menus' method='POST' class="form-signin" role="form">
-          <h1>Menu Page Index</h1>
-          <h4>Add a new menu:</h4>
-          <div class="input-group">
+<div class="container">
+  <div class="col-lg-5 col-lg-offset-3">
+    <div class="form-group">
+      <form action='/admin/menus' method='POST' class="form-signin" role="form">
+        <h1>Menu Page Index</h1>
+        <h4>Add a new menu:</h4>
+        <div class="input-group">
           <input type='text' name='menu[title]' placeholder='new menu name' class="form-control">
           <span class="input-group-btn">
             <button class="btn btn-primary" type="submit">Submit</button>
@@ -16,16 +16,16 @@
   </div>
   <div class='row col-lg-3 col-lg-offset-1'>
     <a href="#" class="list-group-item active">Edit Menus</a>
-      <div class="list-group">
-        <% menus.each do |menu| %>
-          <a href="/admin/menus/<%= menu.id %>" class="list-group-item"><%= menu.title %></a>
-        <% end %>
-      </div>
-    </div>
-    <div class="hero-unit col-lg-9">
-      <h2>Existing Menus</h2>
+    <div class="list-group">
       <% menus.each do |menu| %>
-        <%= erb :menu_tab, locals: { menu: menu} %>
+        <a href="/admin/menus/<%= menu.id %>" class="list-group-item"><%= menu.title %></a>
       <% end %>
     </div>
   </div>
+  <div class="hero-unit col-lg-9">
+    <h2>Existing Menus</h2>
+    <% menus.each do |menu| %>
+      <%= erb :menu_tab, locals: { menu: menu} %>
+    <% end %>
+  </div>
+</div>
