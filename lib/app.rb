@@ -96,6 +96,7 @@ class HapaSushiApp < Sinatra::Base
       flash.now[:error] = validator.errors
       erb :contact
     end
+  end
 
   get '/admin/login' do
     erb :admin_login, layout: :admin_layout
