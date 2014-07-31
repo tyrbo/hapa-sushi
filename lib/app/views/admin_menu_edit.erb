@@ -1,33 +1,45 @@
-<h1>Editing: <%= @menu.title %></h1>
-<form action='/admin/menus/<%= @menu.id %>' method='POST'>
-  <input type='text' name='menu[title]' placeholder='new menu name' value='<%= html_safe @menu.title %>'>
-  <input type="hidden" name="_method" value="PUT">
-  <input type='submit'>
-</form>
-<form action='/admin/menus/<%= @menu.id %>/sections' method='POST'>
-  <h3>Create a new section:</h3>
-  <input type='text' name='section[title]' placeholder='new section name'>
-
-  <label for='left'>Main</label>
-  <input type='radio' id='left' name='section[alignment]' value='left' checked>
-
-  <label for='right'>Sidebar</label>
-  <input type='radio' id='right' name='section[alignment]' value='right'>
-
-  <input type='submit'>
-</form>
-
-<h3>Existing Sections</h3>
-<ul>
-  <% @menu.sections.each do |section| %>
-    <li>
-      <%= section.title %>
-      <a href="/admin/menus/<%= @menu.id %>/sections/<%= section.id %>">Edit</a>
-      <form action="/admin/menus/<%= @menu.id %>/sections/<%= section.id %>" method="POST">
-        <input type="hidden" name="_method" value="DELETE">
-        <input type="submit" value="delete"/>
-      </form>
-    </li>
-  <% end %>
-</ul>
-<a href="/admin/menus">Back</a>
+<%= erb :navbar %>
+  <div class="container">
+    <div class="col-lg-5 col-lg-offset-3">
+      <h1>Editing: <%= @menu.title %></h1>
+        <form action='/admin/menus/<%= @menu.id %>' method='POST' class='form-signin'>
+        <input type="hidden" name="_method" value="PUT">
+          <div class="input-group">
+          <input type="text" class="form-control" placeholder='new menu name' value='<%= html_safe @menu.title %>'>
+          <span class="input-group-btn">
+            <button class="btn btn-primary" type="button">Submit</button>
+          </span>
+        </form>
+      </div>
+    </div>
+    <div class='row col-lg-3 col-lg-offset-1'>
+      <a href="#" class="list-group-item active">Edit Sections</a>
+      <div class="list-group">
+        <% @menu.sections.each do |section| %>
+          <a href="/admin/menus/<%= @menu.id %>/sections/<%= section.id %>" class="list-group-item"><%= section.title %></a>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-lg-5 col-lg-offset-3">
+      <h3>Create a new section:</h3>
+      <h5>and choose an alignment:</h5>
+        <form action='/admin/menus/<%= @menu.id %>/sections' method='POST'>
+        <label for='left'>Main</label>
+        <input type='radio' id='left' name='section[alignment]' value='left' checked>
+        <label for='right'>Sidebar</label>
+        <input type='radio' id='right' name='section[alignment]' value='right'>
+        <div class="input-group">
+        <input type='text' name='section[title]' class= 'form-control' placeholder='new section name'>
+          <span class="input-group-btn">
+            <button class="btn btn-primary" type="button">Submit</button>
+          </span>
+        </form>
+      </div>
+    </div>
+    <div class="hero-unit col-lg-9">
+      <h2>Existing Sections in: <%= @menu.title %></h2>
+      <% @menu.sections.each do |section| %>
+        <%= erb :section_tab, locals: { section: section} %>
+      <% end %>
+    </div>
+  </div>

@@ -1,10 +1,15 @@
-<h1>Editing: <%= @item.title %></h1>
-<form action='/admin/menus/<%= @menu_id %>/sections/<%= @section_id %>/items/<%= @item.id %>' method='POST'>
-  <input type='text' name='item[title]' placeholder='new item name' value='<%= html_safe @item.title %>'>
-  <input type='text' name='item[description]' placeholder='new item description' value='<%= html_safe @item.description %>'>
-  <input type='text' name='item[price]' placeholder='new item price' value='<%= html_safe @item.price %>'>
+<%= erb :navbar %>
+  <div class="container">
+    <div class="col-lg-5 col-lg-offset-3">
+      <h1>Editing: <%= @item.title %></h1>
+        <form action='/admin/menus/<%= @menu_id %>/sections/<%= @section_id %>/items/<%= @item.id %>' method='POST'>
+          <input type='text' name='item[title]' class='form-control' placeholder='new item name' value='<%= html_safe @item.title %>'>
+          <input type='text' name='item[description]' class='form-control' placeholder='new item description' value='<%= html_safe @item.description %>'>
+          <input type='text' name='item[price]' class='form-control' placeholder='new item price' value='<%= html_safe @item.price %>'>
+          <input type="hidden" name="_method" value="PUT">
+          <input type='submit'class='btn btn-primary btn-block'>
+        </form>
+      </div>
+    </div>
 
-  <input type="hidden" name="_method" value="PUT">
-  <input type='submit'>
-</form>
 <a href="/admin/menus/<%= @menu_id %>/sections/<%= @section_id %>">Back</a>

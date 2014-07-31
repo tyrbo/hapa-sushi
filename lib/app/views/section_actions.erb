@@ -1,0 +1,5 @@
+<form  class='form-signin' action="/admin/menus/<%= @menu.id %>/sections/<%= section.id %>" method="POST">
+  <a class= 'btn btn-primary' href="/admin/menus/<%= @menu.id %>/sections/<%= section.id %>">Edit</a>
+  <input type="hidden" name="_method" value="DELETE">
+  <input class="btn btn-primary" type="submit" value="Delete"/>
+</form>
