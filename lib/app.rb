@@ -2,8 +2,8 @@ require 'sequel'
 
 environment = ENV['RUBY_ENV'] || 'development'
 DB = Sequel.sqlite("db/hapa_#{environment}")
-Sequel::Model.plugin :hook_class_methods
 
+require 'app/modules/path_builder'
 require 'app/models/menu'
 require 'app/models/section'
 require 'app/models/item'
@@ -67,12 +67,11 @@ class HapaSushiApp < Sinatra::Base
   end
 
   post '/admin/menus' do
-    Menu.create(params[:menu])
+    Menu.create_with_path(params[:menu])
     redirect '/admin/menus'
   end
 
   get '/admin/menus/:id' do |id|
-    puts "Finding #{id}"
     @menu = Menu.find(id: id)
     erb :admin_menu_edit, layout: :admin_layout
   end
@@ -83,7 +82,7 @@ class HapaSushiApp < Sinatra::Base
   end
 
   put '/admin/menus/:id' do |id|
-    Menu.find(id: id).update(params[:menu])
+    Menu.find(id: id).update_with_path(params[:menu])
     redirect "/admin/menus/#{id}"
   end
 
