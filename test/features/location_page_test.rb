@@ -35,7 +35,7 @@ describe 'User can visit a location page' do
 
   describe 'a user visiting the boulder location page' do
     it 'should be able to see title' do
-      Location.create(path: 'boulder-pearl-street', title: 'Boulder-Pearl Street')
+      Location.create(path: 'boulder-pearl-street', title: 'Boulder-Pearl Street', delivery: '', reservations: '')
       visit '/location/boulder-pearl-street'
 
       assert_equal 200, page.status_code
