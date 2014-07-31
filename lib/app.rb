@@ -2,12 +2,14 @@ require 'sequel'
 
 environment = ENV['RUBY_ENV'] || 'development'
 DB = Sequel.sqlite("db/hapa_#{environment}")
+Sequel::Model.plugin :hook_class_methods
 
 require 'app/models/menu'
 require 'app/models/section'
 require 'app/models/item'
 require 'app/helpers/menu_helper'
 require 'app/helpers/link_helper'
+require 'app/helpers/html_helper'
 require 'app/models/location'
 require 'app/models/photo'
 require 'app/models/happy_hour'
@@ -16,7 +18,7 @@ class HapaSushiApp < Sinatra::Base
   set :root, 'lib/app'
   set :method_override, true
 
-  helpers MenuHelper, LinkHelper
+  helpers MenuHelper, LinkHelper, HTMLHelper
 
   not_found do
     erb :not_found
@@ -70,6 +72,7 @@ class HapaSushiApp < Sinatra::Base
   end
 
   get '/admin/menus/:id' do |id|
+    puts "Finding #{id}"
     @menu = Menu.find(id: id)
     erb :admin_menu_edit, layout: :admin_layout
   end
@@ -77,5 +80,54 @@ class HapaSushiApp < Sinatra::Base
   delete '/admin/menus/:id' do |id|
     Menu.find(id: id).delete
     redirect '/admin/menus'
+  end
+
+  put '/admin/menus/:id' do |id|
+    Menu.find(id: id).update(params[:menu])
+    redirect "/admin/menus/#{id}"
+  end
+
+  post '/admin/menus/:menu_id/sections' do |menu_id|
+    menu = Menu.find(id: menu_id)
+    menu.add_section(params[:section])
+    redirect "/admin/menus/#{menu_id}"
+  end
+
+  delete '/admin/menus/:menu_id/sections/:section_id' do |menu_id, section_id|
+    Section.find(id: section_id).delete
+    redirect "/admin/menus/#{menu_id}"
+  end
+
+  get '/admin/menus/:menu_id/sections/:section_id' do |menu_id, section_id|
+    @menu_id = menu_id
+    @section = Section.find(id: section_id)
+    erb :admin_section_edit, layout: :admin_layout
+  end
+
+  put '/admin/menus/:menu_id/sections/:section_id' do |menu_id, section_id|
+    Section.find(id: section_id).update(params[:section])
+    redirect "/admin/menus/#{menu_id}/sections/#{section_id}"
+  end
+
+  post '/admin/menus/:menu_id/sections/:section_id/items' do |menu_id, section_id|
+    section = Section.find(id: section_id)
+    section.add_item(params[:item])
+    redirect "/admin/menus/#{menu_id}/sections/#{section_id}"
+  end
+
+  delete '/admin/menus/:menu_id/sections/:section_id/items/:item_id' do |menu_id, section_id, item_id|
+    Item.find(id: item_id).delete
+    redirect "/admin/menus/#{menu_id}/sections/#{section_id}"
+  end
+
+  get '/admin/menus/:menu_id/sections/:section_id/items/:item_id' do |menu_id, section_id, item_id|
+    @menu_id, @section_id = menu_id, section_id
+    @item = Item.find(id: item_id)
+    erb :admin_item_edit, layout: :admin_layout
+  end
+
+  put '/admin/menus/:menu_id/sections/:section_id/items/:item_id' do |menu_id, section_id, item_id|
+    Item.find(id: item_id).update(params[:item])
+    redirect "/admin/menus/#{menu_id}/sections/#{section_id}"
   end
 end
