@@ -2,19 +2,13 @@
   <h2 class="title"><%= location.title %></h2>
   <div class="single-location">
     <% if location.primary_image %>
-      <a href='/images/uploads/<%= location.primary_image.image.file.filename %>'>
-        <img src='/images/uploads/<%= location.primary_image.image.location_primary.file.filename %>' class='location-image fl' width='600' height='350'>
-      </a>
+      <img src='/images/uploads/<%= location.primary_image.image.location_primary.file.filename %>' class='location-image fl' width='600' height='350'>
     <% elsif location.photos.first %>
-      <a href='/images/uploads/<%= location.photos.first.image.file.filename %>'>
-        <img src='/images/uploads/<%= location.photos.first.image.location_primary.file.filename %>' class='location-image fl' width='600' height='350'>
-      </a>
+      <img src='/images/uploads/<%= location.photos.first.image.location_primary.file.filename %>' class='location-image fl' width='600' height='350'>
     <% end %>
     <div class="fix"></div>
     <% location.photos.reject(&:primary?).each do |photo| %>
-      <a href="/images/uploads/<%= photo.image.file.filename %>">
-        <img src="/images/uploads/<%= photo.image.thumb.file.filename %>" class="thumb fl" width="145" height="90">
-      </a>
+      <img src="/images/uploads/<%= photo.image.thumb.file.filename %>" class="thumb fl" style="cursor:pointer;" width="145" height="90">
     <% end %>
   </div>
 </div>
@@ -42,3 +36,18 @@
     <p><a href="<%= location.reservations %>">Make a Reservation</a></p>
   <% end %>
 </div>
+<script type='text/javascript'>
+  $('.thumb').click(function(e) {
+    primary = $('img.location-image');
+    thumb = $(this);
+
+    old_src = primary.attr('src').replace('location_primary_', 'thumb_')
+    new_src = thumb.attr('src').replace('thumb_', 'location_primary_')
+
+    primary.attr('src', new_src);
+    thumb.attr('src', old_src);
+
+    e.stopPropagation();
+    return false;
+  });
+</script>
