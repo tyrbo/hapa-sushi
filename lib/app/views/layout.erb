@@ -79,8 +79,13 @@
               <% end %>
             </ul>
           </li>
-          <li class="<%= classes_for(path: '/location') %>"><a href="/location">Locations</a></li>
-          <li class="<%= classes_for(path: '/shop') %>"><a href="/shop">Shop</a></li>
+          <li class="<%= classes_for(path: '/location', children: true) %>"><a href="/location">Locations</a>
+            <ul class="sub-menu">
+              <% locations.each do |location| %>
+                <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="/location/<%= location.path %>"><%= location.title %></a></li>
+              <% end %>
+            </ul>
+          </li>
           <li class="<%= classes_for(path: '/make-a-reservation') %>"><a href="/make-a-reservation">Reservations</a></li>
           <li class="<%= classes_for(path: '/about-hapa') %>"><a href="/about-hapa">About Hapa</a></li>
           <li class="<%= classes_for(path: '/catering') %>"><a href="/catering">Catering</a></li>

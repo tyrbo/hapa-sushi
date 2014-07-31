@@ -1,8 +1,40 @@
-<%= location.title %>
-<% location.photos.each do |photo| %>
-  <img src="images/uploads/<%= photo.path %>" alt="<%= photo.alt %>">
-<% end %>
-<% location.happy_hours.each do |menu| %>
-  <%= menu.title %>
-  <%= menu.description %>
-<% end %>
+<div id="main" class="col-left">
+  <h2 class="title"><%= location.title %></h2>
+  <div class="single-location">
+    <% if location.primary_image %>
+      <a href='/images/uploads/<%= location.primary_image.image.file.filename %>'>
+        <img src='/images/uploads/<%= location.primary_image.image.location_primary.file.filename %>' class='location-image fl' width='600' height='350'>
+      </a>
+    <% elsif location.photos.first %>
+      <a href='/images/uploads/<%= location.photos.first.image.file.filename %>'>
+        <img src='/images/uploads/<%= location.photos.first.image.location_primary.file.filename %>' class='location-image fl' width='600' height='350'>
+      </a>
+    <% end %>
+    <div class="fix"></div>
+    <% location.photos.reject(&:primary?).each do |photo| %>
+      <a href="/images/uploads/<%= photo.image.file.filename %>">
+        <img src="/images/uploads/<%= photo.image.thumb.file.filename %>" class="thumb fl" width="145" height="90">
+      </a>
+    <% end %>
+  </div>
+</div>
+<div id="sidebar" class="col-right location-side">
+  <h2 class="title">Address</h2>
+  <p>
+    <%= location.title %>
+  </p>
+  <h2 class="title">Hours</h2>
+  <p>
+    <%= location.hours %>
+  </p>
+  <h2 class="title">Phone / Fax </h2>     
+  <p>
+    <%= location.phone_fax %>
+  </p>
+
+  <h2 class="title">Delivery</h1>
+  <p><a href="<%= location.delivery %>">Order Delivery</a></p>
+
+  <h2 class="title">Reservations</h1>
+  <p><a href="<%= location.reservations %>">Make a Reservation</a></p>
+</div>

@@ -5,7 +5,13 @@ class Location < Sequel::Model
   one_to_many :happy_hours
 
   def primary_image
-    photos.detect { |x| x.primary == true } ||
-      Photo.new(path: 'default.jpg', alt: 'No image available.', primary: true)
+    photos.detect(&:primary?)
+  end
+  
+  def add_photo(params)
+    photo = Photo.new(params)
+    photo.image = params[:file]
+    photo.location_id = id
+    photo.save
   end
 end

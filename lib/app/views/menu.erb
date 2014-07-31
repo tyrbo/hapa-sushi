@@ -19,8 +19,8 @@
           <div class="price-left"><%= item.price %></div>
         </div>
       <% end %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>
 <div id="sidebar" class="col-right">
   <% menu.sections.select(&:right?).each do |section| %>
@@ -46,6 +46,6 @@
 <script type="text/javascript">
   animatedcollapse.init();
   <% menu.sections.each do |section| %>
-    animatedcollapse.addDiv('menu-<%= section.id %>', 'fade=1,height=auto')
+ animatedcollapse.addDiv('menu-<%= section.id %>', 'fade=1,height=auto')
   <% end %>
 </script>

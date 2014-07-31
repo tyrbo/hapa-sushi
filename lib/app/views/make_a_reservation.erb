@@ -1,0 +1,16 @@
+<div id="main" class="fullwidth">
+  <% @locations.each do |location| %>
+    <div class="location-list">
+      <% if location.primary_image %>
+        <img src="/images/uploads/<%= location.primary_image.image.location_index.file.filename %>" width='440' height='400'>
+      <% else %>
+        <img src="" width='440' height='400'>
+      <% end %>
+      <h2><%= location.title %></h2>
+      <div class="entry fancy-link">
+        <a href="<%= location.reservations %>">Make a Reservation</a>
+      </div>
+      <a class="fr" href="/location/<%= location.path %>">[ see more details first ]</a>
+    </div>
+  <% end %>
+</div>

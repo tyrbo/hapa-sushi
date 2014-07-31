@@ -7,6 +7,9 @@ gem 'sequel'
 gem 'sqlite3'
 gem 'mail'
 gem 'ValidateEmail'
+gem 'carrierwave'
+gem 'carrierwave-sequel', :require => 'carrierwave/sequel'
+gem 'mini_magick'
 
 group :test do
   gem 'capybara'
