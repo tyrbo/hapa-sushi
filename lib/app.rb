@@ -8,11 +8,17 @@ require 'app/models/section'
 require 'app/models/item'
 require 'app/helpers/menu_helper'
 require 'app/helpers/link_helper'
+require 'app/services/mail_validator'
+require 'app/services/mailer'
 
 class HapaSushiApp < Sinatra::Base
   set :root, 'lib/app'
+  set :session_secret, ENV['SESSION_SECRET'] ||= 'secret'
 
   helpers MenuHelper, LinkHelper
+
+  enable :sessions
+  use Rack::Flash
 
   not_found do
     erb :not_found
@@ -37,5 +43,27 @@ class HapaSushiApp < Sinatra::Base
 
   get '/catering' do
     erb :catering
+  end
+
+  get '/contact' do
+    erb :contact
+  end
+
+  post '/contact' do
+    validator = MailValidator.new(params)
+    if validator.valid?
+      flash.now[:success] = true
+      Mailer.mail_from_params(params)
+      Mailer.mail(
+                  from: 'no-reply@hapasushi.com',
+                    to: params['email'],
+               subject: '(Copy) Your Contact Submission',
+                  body: "#{params[:contactName]} wrote:\n\n#{params[:comments]}"
+                 ) if params[:sendCopy]
+      erb :contact
+    else
+      flash.now[:error] = validator.errors
+      erb :contact
+    end
   end
 end

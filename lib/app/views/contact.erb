@@ -1,0 +1,40 @@
+<div id="main" class="col-left">
+  <div id="contact-page" class="post">
+    <h1 class="title">Contact</h1>
+    <% if flash[:success] %>
+      <p class="tick"><strong>Thanks!</strong> Your email was successfully sent.</p>
+    <% end %>
+    <form action="/contact" id="contactForm" method="post">
+      <ol class="forms">
+        <li>
+          <label for="contactName">Name</label>
+          <input type="text" name="contactName" id="contactName" class="txt requiredField">
+          <% if flash.has?(:error) && flash[:error][:contactName] %>
+            <span class="error">You must enter your name.</span>
+          <% end %>
+        </li>
+        <li>
+          <label for="email">Email</label>
+          <input type="text" name="email" id="email" class="txt requiredField email">
+          <% if flash.has?(:error) && flash[:error][:email] %>
+            <span class="error">You must enter a valid email address.</span>
+          <% end %>
+        </li>
+        <li class="textarea">
+          <label for="commentsText">Message</label>
+          <textarea name="comments" id="commentsText" rows="20" cols="30" class="requiredField"></textarea>
+          <% if flash.has?(:error) && flash[:error][:comments] %>
+            <span class="error">You must enter a message.</span>
+          <% end %>
+        </li>
+        <li class="inline">
+          <input type="checkbox" name="sendCopy" id="sendCopy" value="true">
+          <label for="sendCopy">Send a copy of this email to yourself</label>
+        </li>
+        <li class="buttons">
+          <input class="submit button" type="submit" value="Submit">
+        </li>
+      </ol>
+    </form>
+  </div>
+</div>
