@@ -14,6 +14,7 @@ require 'app/models/happy_hour'
 
 class HapaSushiApp < Sinatra::Base
   set :root, 'lib/app'
+  set :method_override, true
 
   helpers MenuHelper, LinkHelper
 
@@ -53,5 +54,28 @@ class HapaSushiApp < Sinatra::Base
 
   get '/catering' do
     erb :catering
+  end
+
+  get '/admin' do
+    erb :admin, layout: :admin_layout
+  end
+
+  get '/admin/menus' do
+    erb :admin_menu_index, layout: :admin_layout
+  end
+
+  post '/admin/menus' do
+    Menu.create(params[:menu])
+    redirect '/admin/menus'
+  end
+
+  get '/admin/menus/:id' do |id|
+    @menu = Menu.find(id: id)
+    erb :admin_menu_edit, layout: :admin_layout
+  end
+
+  delete '/admin/menus/:id' do |id|
+    Menu.find(id: id).delete
+    redirect '/admin/menus'
   end
 end
