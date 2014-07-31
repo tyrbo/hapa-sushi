@@ -1,0 +1,20 @@
+<h1>Menu Page Index</h1>
+    <form action='/admin/menus' method='POST'>
+      <h3>create a new menu:</h3>
+      <input type='text' name='menu[title]' placeholder='new menu name'/><br/>
+      <input type='submit'/>
+    </form>
+
+<h3>Existing Menus</h3>
+<ul>
+  <% menus.each do |menu| %>
+    <li>
+      <%= menu.title %>
+      <a href="/<%= menu.id %>/edit">Edit</a>
+      <form action="/admin/menus/<%= menu.id %>" method="POST">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="submit" value="delete"/>
+      </form>
+    </li>
+  <% end %>
+</ul>
