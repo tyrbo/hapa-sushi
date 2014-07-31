@@ -1,0 +1,6 @@
+<form action="/admin/menus/<%= @menu_id %>/sections/<%= @section.id %>/items/<%= item.id %>" method="POST">
+<a href="/admin/menus/<%= @menu_id %>/sections/<%= @section.id %>/items/<%= item.id %>" class='btn btn-primary'>Edit</a>
+  <input type="hidden" name="_method" value="DELETE">
+  <input type='hidden' name='section[id]' value='<%= @section.id %>'>
+  <input class= 'btn btn-primary' type="submit" value="Delete"/>
+</form>
