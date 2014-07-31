@@ -1,6 +1,7 @@
 <h1 class="menu-title">
   <%= menu.title %> Menu
 </h1>
+<div class="fix"></div>
 <div id="main" class="col-left">
   <% menu.sections.select(&:left?).each do |section| %>
     <h2 class="menu-anchor">
@@ -20,6 +21,7 @@
         </div>
       <% end %>
     </div>
+    <div class="fix"></div>
   <% end %>
 </div>
 <div id="sidebar" class="col-right">
