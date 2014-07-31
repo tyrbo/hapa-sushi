@@ -1,4 +1,6 @@
 class Location < Sequel::Model
+  include PathBuilder
+
   one_to_many :photos
   one_to_many :happy_hours
 
